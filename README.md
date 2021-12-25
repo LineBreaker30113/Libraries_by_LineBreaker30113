@@ -10,6 +10,7 @@ the Abdulhalim ESEN is me so i am introducing my thougts about programming:
 
 :-> also encapsulation may and will couse to reduce programs optimization.
 
+
 2:> I like developing simple template utility libraries becouse c++ needs a bit more than what it has.
 
 3:> I'd like to develop which template helper you want.
