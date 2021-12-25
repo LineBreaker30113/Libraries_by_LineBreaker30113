@@ -6,8 +6,11 @@ They are really simple and easy to use. Mostly just really simple, helper librar
 
 the Abdulhalim ESEN is me so i am introducing my thougts about programming:
 
-1:> I hate encapsulation becouse for me there is not terrorists that plan to attack to my objects members also encapsulation may and will couse to reduce programs optimization.
+1:> I hate encapsulation becouse for me there is no terrorists that plan to attack to object's members.
+ :>also encapsulation may and will couse to reduce programs optimization.
 
 2:> I like developing simple template utility libraries becouse c++ needs a bit more than what it has.
 
-3:> I like to develop which template helper you want
+3:> I'd like to develop which template helper you want.
+
+4:> I am serious and I like to do my job best I can.
