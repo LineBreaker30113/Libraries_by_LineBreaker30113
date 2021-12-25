@@ -8,8 +8,9 @@ namespace aetl {// Abdulhalim ESEN's Template Library
 		struct zzm_bridgeT { contentT content; refCntrT refCntr = 1; std::mutex mutex; };
 		zzm_bridgeT* zzm; contentT& onstart(); constexpr void on_end(); const contentT& readnow();
 
-		operator zzm_bridgeT& (); tbridge(); tbridge(zzm_bridgeT other); ~tbridge();
+		operator zzm_bridgeT*& (); tbridge(); tbridge(zzm_bridgeT* other); ~tbridge(); constexpr void zzzm_onDelete();
 
+		constexpr void operator=(zzm_bridgeT* other);
 	};
 
 	template<typename cT, typename rCT> inline cT& tbridge<cT, rCT>::onstart() { zzm->mutex.lock(); return zzm->content; }
@@ -17,12 +18,17 @@ namespace aetl {// Abdulhalim ESEN's Template Library
 
 	template<typename cT, typename rCT> inline const cT& tbridge<cT, rCT>::readnow() { return zzm->content; }
 
-	template<typename cT, typename rCT> inline tbridge<cT, rCT>::operator zzm_bridgeT& () { return zzm->content; }
+	template<typename cT, typename rCT> inline tbridge<cT, rCT>::operator zzm_bridgeT*& () { return zzm->content; }
 	template<typename cT, typename rCT> inline tbridge<cT, rCT>::tbridge() : zzm(new zzm_bridgeT) {}
-	template<typename cT, typename rCT> inline tbridge<cT, rCT>::tbridge(zzm_bridgeT other)
+	template<typename cT, typename rCT> inline tbridge<cT, rCT>::tbridge(zzm_bridgeT* other)
 		: zzm(std::move(other)) { zzm->refCntr++; }
-	template<typename contentT, typename refCntrT> inline tbridge<contentT, refCntrT>::~tbridge()
+	template<typename cT, typename rCT> inline tbridge<cT, rCT>::~tbridge()	{ zzzm_onDelete(); }
+
+	template<typename cT, typename rCT>	inline constexpr void tbridge<cT, rCT>::zzzm_onDelete()
 	{ zzm->mutex.lock(); zzm->refCntr--; if (!zzm->refCntr) { zzm->mutex.unlock(); delete zzm; return; } zzm->mutex.unlock(); }
+
+	template<typename cT, typename rCT>	inline constexpr void tbridge<cT, rCT>::operator=(zzm_bridgeT* other)
+	{ zzzm_onDelete(); other->mutex.lock(); zzm = std::move(other); zzm->refCntr++; zzm->mutex.unlock; }
 
 	/*example use:
 	* ...
