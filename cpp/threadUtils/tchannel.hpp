@@ -1,10 +1,11 @@
+// currently doesn't work just here to show you the idea
 #pragma once
 #include <chrono>
 #include <thread>
 #include <mutex>
 #include <bitset>
 
-namespace aetl {// Abdulhalim ESEN's Template Library
+namespace ael {// Abdulhalim ESEN's Template Library
 	// simple struct for passing values across threads
 	template<typename cT, std::uint32_t cD = 100, typename rCT = std::uint8_t> struct tchannel {
 
