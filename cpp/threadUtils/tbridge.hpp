@@ -1,7 +1,7 @@
 #pragma once
 #include <mutex>
 
-namespace aetl {// Abdulhalim ESEN's Template Library
+namespace ael {// Abdulhalim ESEN's Template Library
 
 	/*example use:
 	* ...
