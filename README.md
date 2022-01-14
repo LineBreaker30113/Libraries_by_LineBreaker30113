@@ -1,8 +1,8 @@
 # my_Libraries
-My publiced, easy to use, easy to add to your code, simple, utility libraries. Currently I am working on (I call) tchannel.
+My public, easy to use, easy to add to your code, simple, utility libraries.
 They are really simple and easy to use. Mostly just really simple, helper libraries(I guess this is called must-have). Have fun using those.
 
- Currently I am working on (I call) tchannel for c++.
+Currently I am working on (I call) tchannel for c++.
 
 the Abdulhalim ESEN is me so i am introducing my thougts about programming:
 
