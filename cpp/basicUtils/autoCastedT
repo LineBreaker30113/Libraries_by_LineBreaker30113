@@ -2,7 +2,7 @@
 
 namespace ael {// Abdulhalim ESEN's Template Library
 
-	template<typename sT, typename cT> struct autoCastedT {// storde as a thing readed as enoughter thing
+	template<typename sT = int, typename cT = float> struct autoCastedT {// storde as a thing readed as enoughter thing
 		sT s;// means both self and storage
 		operator cT&& () const { return (float)s; }
 		template <typename T> autoCastedT(const T& var) : s(var) {}	autoCastedT(sT&& var) : s(std::move(var)) {}
