@@ -29,7 +29,7 @@ namespace ael {// Abdulhalim ESEN's Template Library
 	template<typename contentT = int, typename refCntrT = std::uint8_t> struct tbridgeT {
 
 		struct zzm_bridgeT { contentT content; refCntrT refCntr = 1; std::mutex mutex; };
-		zzm_bridgeT* zzm; contentT& onstart(); constexpr void on_end(); const contentT& readnow();
+		zzm_bridgeT* zzm; contentT& onstart() const; constexpr void on_end() const; const contentT& readnow() const;
 
 		tbridgeT(const tbridgeT& other); tbridgeT(tbridgeT&& other);
 		tbridgeT(); ~tbridgeT(); tbridgeT(const contentT& val); tbridgeT(contentT&& val);
@@ -37,9 +37,9 @@ namespace ael {// Abdulhalim ESEN's Template Library
 		constexpr void zzzm_onDelete(); constexpr void zzzm_doCopy(const tbridgeT& other);
 	};
 
-	template<typename cT, typename rCT> inline cT& tbridgeT<cT, rCT>::onstart() { zzm->mutex.lock(); return zzm->content; }
-	template<typename cT, typename rCT> inline constexpr void tbridgeT<cT, rCT>::on_end() { zzm->mutex.unlock(); }
-	template<typename cT, typename rCT> inline const cT& tbridgeT<cT, rCT>::readnow() { return zzm->content; }
+	template<typename cT, typename rCT> inline cT& tbridgeT<cT, rCT>::onstart() const { zzm->mutex.lock(); return zzm->content; }
+	template<typename cT, typename rCT> inline constexpr void tbridgeT<cT, rCT>::on_end() const { zzm->mutex.unlock(); }
+	template<typename cT, typename rCT> inline const cT& tbridgeT<cT, rCT>::readnow() const { return zzm->content; }
 
 	template<typename cT, typename rCT> inline tbridgeT<cT, rCT>::tbridgeT() : zzm(new zzm_bridgeT) {}
 	template<typename cT, typename rCT> inline tbridgeT<cT, rCT>::~tbridgeT() { zzzm_onDelete(); }
