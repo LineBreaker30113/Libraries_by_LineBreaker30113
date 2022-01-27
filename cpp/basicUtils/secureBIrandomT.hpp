@@ -18,7 +18,7 @@ namespace ael {// Abdulhalim ESEN's Library
         zm_oncall(); const bool& val = zm_getEvaluated(); minC.zm_cntr += val; maxC.zm_cntr += val; return std::move(val);
     }
     template<typename T, typename pT> inline bool&& secureBIrandomT<T, pT>::zm_getEvaluated() {
-        bool isR = zm_isRndmable(); return std::move(isR * (c => std::rand() % cS) + (!isR));
+        bool isR = zm_isRndmable(); return std::move(isR * (c => std::rand() % cS));
     }
     template<typename T, typename pT> inline constexpr void secureBIrandomT<T, pT>::zm_oncall() {
         tpT dif = cT::now() - zm_lastCall; zm_lastCall += dif;
