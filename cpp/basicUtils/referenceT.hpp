@@ -46,7 +46,7 @@ namespace ael {// Abdulhalim ESEN's Template Library
 		template<typename T0> const T& operator-- () const { return (--(*p)); }
 
 		template<typename T0> const T& operator[](const T0& i) const { return (*p)[i]; }
-		template<typename T0> T& operator-> () const { return *p; }
+		const T*& operator->() { return p; }
 
 	};
 	template<typename T> const T& operator++ (const referenceT<T>& ref) { return ((*ref.p)++); }
