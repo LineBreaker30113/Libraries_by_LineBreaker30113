@@ -43,7 +43,7 @@ namespace ael {// Abdulhalim ESEN's Template Library
 		template<typename T0> const T& operator++ () const { return (++(*p)); }
 		template<typename T0> const T& operator-- () const { return (--(*p)); }
 
-		const T*& operator-> () const { return p; }
+		T* operator-> () const { return p; }
 	};
 	template<typename T> const T& operator++ (const heapAllcT<T>& r) { return ((*r.p)++); }
 	template<typename T> const T& operator-- (const heapAllcT<T>& r) { return ((*r.p)--); }
