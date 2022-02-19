@@ -1,6 +1,6 @@
 #pragma once
 
-namespace ael {// Abdulhalim ESEN's Template Library
+namespace ael {// Abdulhalim ESEN's Libraries
 
 	template<typename T> struct referenceT {// a pointer acts as an referenceT
 		T* p;// the variable pointer
@@ -46,7 +46,7 @@ namespace ael {// Abdulhalim ESEN's Template Library
 		template<typename T0> const T& operator-- () const { return (--(*p)); }
 
 		template<typename T0> const T& operator[](const T0& i) const { return (*p)[i]; }
-		const T*& operator->() const { return p; }
+		T* operator->() const { return p; }
 
 	};
 	template<typename T> const T& operator++ (const referenceT<T>& ref) { return ((*ref.p)++); }
