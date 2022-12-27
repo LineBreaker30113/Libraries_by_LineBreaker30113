@@ -6,10 +6,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.InetSocketAddress;
+import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
-
-import lbLibrary.DataUtility.Version1.lbSocket.lbSocketData;
 
 
 
@@ -290,6 +290,9 @@ public class DataUtility {
 			public default byte[] loads() throws IOException {
 				byte[] bytes = new byte[getInph().readInt()]; getInph().read(bytes); return bytes;
 			}
+			public default int loads(byte[] buffer, int offset, int length) throws IOException {
+				return getInph().read(buffer, offset, length);
+			}
 			public default char[] loadChars() throws IOException { return TypeConverting.byte2charArray(loads()); }
 			public default short loadShort() throws IOException { return getInph().readShort(); }
 			public default int loadInt() throws IOException { return getInph().readInt();  }
@@ -430,6 +433,34 @@ public class DataUtility {
 			public void close() throws IOException {
 				if(self != null) { lbClose(); self.close(); self = null; return; }
 				inph = null; outh = null;
+			}
+			/**
+			 * Creates a new socket that connects to the target of current socket.
+			 * Current Socket only loads the port of the target. Then everthing is back to normal.
+			 * The target lbSocket object must call "createSocket_accept()" before this function.
+			 */
+			public lbSocket createSocket_connect(int maxTry) {
+				String targetAdress = ((InetSocketAddress) self.getRemoteSocketAddress()).getAddress().toString().replace("/","");
+				int port = 0; lbSocket connection = null; int tries = 0;
+				try { port = loadInt(); } catch (IOException e1) { e1.printStackTrace(); return null; }
+				while(maxTry < tries) {
+					tries++;
+					try { connection = new lbSocket(new Socket(targetAdress, port));
+					} catch(IOException e) { e.printStackTrace(); }
+				}
+				return connection;
+			}
+			/**
+			 * Creates a new socket that connects to the target of current socket.
+			 * Current Socket only sends the port of the temporal listener. Then everthing is back to normal.
+			 * The target lbSocket object must call "createSocket_connect()" after this function.
+			 */
+			public lbSocket createSocket_accept() throws IOException {
+				ServerSocket listener = new ServerSocket(0);
+				sendInt(listener.getLocalPort());
+				lbSocket connection = new lbSocket(listener.accept());
+				listener.close();
+				return connection;
 			}
 			
 			public static interface lbSocketData {
